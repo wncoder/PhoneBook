@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace PhoneBook.Models
 {
-    public partial class ps_contactsContext : DbContext
+    public partial class ContactBookContext : DbContext
     {
-        public ps_contactsContext()
+        public ContactBookContext()
         {
         }
 
-        public ps_contactsContext(DbContextOptions<ps_contactsContext> options)
+        public ContactBookContext(DbContextOptions<ContactBookContext> options)
             : base(options)
         {
         }
