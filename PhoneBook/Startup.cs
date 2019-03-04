@@ -16,7 +16,7 @@ namespace PhoneBook
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration, ContactBookContext db)
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }

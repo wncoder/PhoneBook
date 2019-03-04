@@ -1,17 +1,46 @@
-﻿@{
+﻿@model Person
+@{
     ViewData["Title"] = "Contact";
 }
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
 
-<address>
-    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<form asp-action="Contact">
+    @if (ViewBag.Mode == "edit")
+    {
+    }
+    <input asp-for="Id" type="hidden" />
+    <div class="form-group">
+        <input class="form-control" asp-for="FirstName" />
+    </div>
+    <div class="form-group">
+        <input class="form-control" asp-for="LastName" />
+    </div>
+    @if (ViewBag.Mode != "edit")
+    {
+        <div class="input-group">
+            <label asp-for="Phones"></label>
+            <input type="text" class="form-control" name="Phones[0].PhoneNumber">
+        </div>
+        <div class="input-group">
+            <label asp-for="Phones"></label>
+            <input type="text" class="form-control" name="Phones[1].PhoneNumber">
+        </div>
+    }
+    else
+    {
+        foreach (var phone in Model.Phones)
+        {
+            int inx=0;
+            <div class="input-group">
+                <label asp-for="Phones"></label>
+                <input type="text" class="form-control" name="Phones[@inx].PhoneNumber" value="@phone.PhoneNumber">
+                <input type="text" class="form-control" name="Phones[@inx].Id" value="@phone.Id">
+            </div>
+            inx++;
+        }
+    }
+
+    <input type="submit" name="name" value="Add" />
+</form>

@@ -2,7 +2,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+@*<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -51,14 +51,23 @@
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
-</div>
+</div>*@
 
+@model List<Person>
 <div class="row">
     <div class="col-md-3">
         <h2>Application uses</h2>
         <ul>
-            <li>Sample pages using ASP.NET Core MVC</li>
-            <li>Theming using <a href="https://go.microsoft.com/fwlink/?LinkID=398939">Bootstrap</a></li>
+            @foreach (var person in Model)
+            {
+            <li>
+                <a asp-action="details" asp-route-id="@person.Id">@person.FirstName</a><br />
+                @foreach (var item in person.Phones)
+                {
+                    @item.PhoneNumber <br />
+                }
+            </li>
+            }
         </ul>
     </div>
     <div class="col-md-3">
