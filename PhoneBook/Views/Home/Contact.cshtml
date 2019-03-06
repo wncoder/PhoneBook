@@ -30,13 +30,13 @@
     }
     else
     {
+        int inx = 0;
         foreach (var phone in Model.Phones)
         {
-            int inx=0;
             <div class="input-group">
                 <label asp-for="Phones"></label>
                 <input type="text" class="form-control" name="Phones[@inx].PhoneNumber" value="@phone.PhoneNumber">
-                <input type="text" class="form-control" name="Phones[@inx].Id" value="@phone.Id">
+                <input type="hidden" class="form-control" name="Phones[@inx].Id" value="@phone.Id">
             </div>
             inx++;
         }
