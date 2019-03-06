@@ -7,31 +7,42 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using PhoneBook.Models;
 
+using PhoneBook.Data;
+
 namespace PhoneBook.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IConfiguration _configuration;
         private readonly ContactBookContext _dbContext;
+        private readonly IPersonService _personService; 
 
-        public HomeController(IConfiguration configuration, ContactBookContext dbContext)
+        public HomeController(
+            IConfiguration configuration,
+            //, ContactBookContext dbContext, 
+            IPersonService personService)
         {
             _configuration = configuration;
-            _dbContext = dbContext;
+            //_dbContext = dbContext;
+            _personService = personService;
         }
 
         public IActionResult Index()
         {
-            var list = _dbContext.Person.ToList();
-            foreach (var item in list)
-            {
-                var phoneList = _dbContext.Phones.Where(p => p.PersonId == item.Id);
-                foreach (var phone in phoneList)
-                {
-                    item.Phones.Add(phone);
-                }
-            }
+            //var list = _dbContext.Person.ToList();
+            //foreach (var item in list)
+            //{
+            //    var phoneList = _dbContext.Phones.Where(p => p.PersonId == item.Id);
+            //    foreach (var phone in phoneList)
+            //    {
+            //        item.Phones.Add(phone);
+            //    }
+            //}
 
+            //var list = _dbContext.Person.ToList();
+            //return View(list);
+
+            var list = _personService.GetAllPerson();
             return View(list);
         }
 

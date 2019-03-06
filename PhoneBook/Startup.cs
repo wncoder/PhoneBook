@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using PhoneBook.Models;
 using Microsoft.EntityFrameworkCore;
 
+using PhoneBook.Data;
+
 namespace PhoneBook
 {
     public class Startup
@@ -27,6 +29,10 @@ namespace PhoneBook
         public void ConfigureServices(IServiceCollection services)
         {            
             services.AddDbContext<ContactBookContext>(options=>options.UseSqlServer(Configuration.GetConnectionString("PhoneBookConnstr")));
+
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient<IPersonService, PersonService>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
