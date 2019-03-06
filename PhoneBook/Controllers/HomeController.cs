@@ -41,6 +41,17 @@ namespace PhoneBook.Controllers
             return View(person);
         }
 
+        public IActionResult Delete(int Id)
+        {
+            var person = _dbContext.Person.Where(p => p.Id == Id).FirstOrDefault();
+            if (person != null)
+            {
+                _dbContext.Person.Remove(person);
+                _dbContext.SaveChanges();
+            }
+            return RedirectToAction("index");
+        }
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
