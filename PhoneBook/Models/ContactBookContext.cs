@@ -1,10 +1,11 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace PhoneBook.Models
 {
-    public partial class ContactBookContext : DbContext
+    public partial class ContactBookContext : IdentityDbContext//DbContext
     {
         public ContactBookContext()
         {

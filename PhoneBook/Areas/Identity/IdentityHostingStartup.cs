@@ -15,12 +15,12 @@ namespace PhoneBook.Areas.Identity
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
-                services.AddDbContext<PhoneBookContext>(options =>
+                services.AddDbContext<ContactBookContext>(options =>
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("PhoneBookConnstr")));
 
                 services.AddDefaultIdentity<IdentityUser>()
-                    .AddEntityFrameworkStores<PhoneBookContext>();
+                    .AddEntityFrameworkStores<ContactBookContext>();
             });
         }
     }
